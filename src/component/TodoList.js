@@ -6,22 +6,20 @@ import { withStyles } from '@material-ui/core/styles';
 const styles = {
   todoList: {
     paddingLeft: 0,
-    width: 400,
-  },
+    width: 400
+  }
 };
 
 class TodoList extends React.Component {
   render() {
     const { tasks, classes } = this.props;
     const todoItems = tasks.map(task => {
-      return <TodoItem {...task} key = {task.id} />;
+      return <TodoItem {...task} key={task.id} />;
     });
 
     return (
       <div>
-        <ul className={classes.todoList}>
-          {todoItems}
-        </ul>
+        <ul className={classes.todoList}>{todoItems}</ul>
       </div>
     );
   }

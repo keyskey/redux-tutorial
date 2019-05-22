@@ -14,35 +14,38 @@ const styles = {
   counterCard: {
     width: 250,
     marginTop: 10,
-    marginRight: 20,
+    marginRight: 20
   },
   counterMedia: {
     height: 200,
     margin: 0,
     marginTop: 10,
-    marginBottom: 10,
-  },
+    marginBottom: 10
+  }
 };
 
-const TodoCounter = (props) => {
-    const { count, classes } = props;
-    const cardColor = count <= 3 ? green['100'] : red['A100'];
-    const cardImage = count <= 3 ? okImage : busyImage;
+const TodoCounter = props => {
+  const { count, classes } = props;
+  const cardColor = count <= 3 ? green['100'] : red['A100'];
+  const cardImage = count <= 3 ? okImage : busyImage;
 
-    return (
-      <Card className={classes.counterCard}>
-        <CardContent className={classes.counterContent} style={{backgroundColor: cardColor}}> 
-          <Typography variant="headline" gutterBottom>
-            {count}個のタスクが残っています
-          </Typography>
-        </CardContent>
-        <CardMedia className={classes.counterMedia} image={cardImage} />
-      </Card>
-    );
-}
+  return (
+    <Card className={classes.counterCard}>
+      <CardContent
+        className={classes.counterContent}
+        style={{ backgroundColor: cardColor }}
+      >
+        <Typography variant="headline" gutterBottom>
+          {count}個のタスクが残っています
+        </Typography>
+      </CardContent>
+      <CardMedia className={classes.counterMedia} image={cardImage} />
+    </Card>
+  );
+};
 
 TodoCounter.propTypes = {
-  count: PropTypes.number.isRequired,
-}
+  count: PropTypes.number.isRequired
+};
 
 export default withStyles(styles)(TodoCounter);

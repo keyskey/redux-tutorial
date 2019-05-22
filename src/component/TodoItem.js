@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
-const TodoItem = (props) => {
-    const { title, id } = props;
+const TodoItem = props => {
+  const { title, id } = props;
 
-    return (
-        <ListItem button>
-          <ListItemText primary={title} />
-        </ListItem>
-    );
-}
+  return (
+    <ListItem button>
+      <ListItemText primary={title} />
+    </ListItem>
+  );
+};
 
 TodoItem.propTypes = {
   title: PropTypes.string.isRequired,

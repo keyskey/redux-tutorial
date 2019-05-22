@@ -12,36 +12,34 @@ import teal from '@material-ui/core/colors/teal';
 
 const styles = {
   appBar: {
-    backgroundColor: teal['A700'],
-  },
+    backgroundColor: teal['A700']
+  }
 };
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasks: [
-        { title: 'タスクその1', id: 0 }
-      ],
-      uniqueId: 1,
-    }
+      tasks: [{ title: 'タスクその1', id: 0 }],
+      uniqueId: 1
+    };
   }
 
-  addTodo = (title) => {
+  addTodo = title => {
     const { tasks, uniqueId } = this.state;
     const newTask = { title: title, id: uniqueId };
     const newTasks = tasks.concat(newTask);
 
     this.setState({ tasks: newTasks, uniqueId: uniqueId + 1 });
-  }
+  };
 
   clearTodo = () => {
-    this.setState({tasks: [], uniqueId: 0});
-  }
+    this.setState({ tasks: [], uniqueId: 0 });
+  };
 
   handleClick = () => {
-    this.setState({tasks: [], uniqueId: 1});
-  }
+    this.setState({ tasks: [], uniqueId: 1 });
+  };
 
   render() {
     const { tasks, uniqueId } = this.state;
@@ -59,7 +57,7 @@ class App extends React.Component {
         </AppBar>
         <Grid container>
           <Grid item xs={6}>
-            <TodoInput addTodo={this.addTodo} clearTodo={this.clearTodo}/>
+            <TodoInput addTodo={this.addTodo} clearTodo={this.clearTodo} />
             <TodoList tasks={tasks} />
           </Grid>
           <Grid item xs={4}>
