@@ -1,8 +1,8 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import TodoInput from './TodoInput';
-import TodoList from './TodoList';
-import TodoCounter from './TodoCounter';
+import TodoInput from './TodoInput.jsx';
+import TodoList from './TodoList.jsx';
+import TodoCounter from './TodoCounter.jsx';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
