@@ -51,6 +51,7 @@
     "react-app-polyfill": "^1.0.1",
     "react-dev-utils": "^9.0.1",
     "react-dom": "^16.8.6",
+    "react-js-to-ts": "^1.4.0",
     "react-redux": "^7.0.3",
     "redux": "^4.0.1",
     "resolve": "1.10.0",
@@ -74,7 +75,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "react-js-to-ts": "react-js-to-ts"
   },
   "eslintConfig": {
     "extends": "react-app"
