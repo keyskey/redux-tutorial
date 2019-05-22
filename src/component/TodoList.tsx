@@ -1,0 +1,30 @@
+import React from 'react';
+import { TodoItem, TodoItemProps } from './TodoItem.tsx';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = {
+  todoList: {
+    paddingLeft: 0,
+    width: 400
+  }
+};
+
+interface TodoListProps {
+  tasks: TodoItemProps[];
+  classes: any;
+}
+
+const TodoList = (props: TodoListProps) => {
+  const { tasks, classes } = props;
+  const todoItems = tasks.map(task => {
+    return <TodoItem {...task} key={task.id} />;
+  });
+
+  return (
+    <div>
+      <ul className={classes.todoList}>{todoItems}</ul>
+    </div>
+  );
+};
+
+export default withStyles(styles)(TodoList);

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -24,7 +23,12 @@ const styles = {
   }
 };
 
-const TodoCounter = props => {
+interface TodoCounterProps {
+  count: number;
+  classes: any;
+}
+
+const TodoCounter = (props: TodoCounterProps) => {
   const { count, classes } = props;
   const cardColor = count <= 3 ? green['100'] : red['A100'];
   const cardImage = count <= 3 ? okImage : busyImage;
@@ -42,10 +46,6 @@ const TodoCounter = props => {
       <CardMedia className={classes.counterMedia} image={cardImage} />
     </Card>
   );
-};
-
-TodoCounter.propTypes = {
-  count: PropTypes.number.isRequired
 };
 
 export default withStyles(styles)(TodoCounter);

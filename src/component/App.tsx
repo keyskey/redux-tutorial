@@ -1,8 +1,9 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import TodoInput from './TodoInput.jsx';
-import TodoList from './TodoList.jsx';
-import TodoCounter from './TodoCounter.jsx';
+import TodoInput from './TodoInput.tsx';
+import TodoItemProps from './TodoItem.tsx';
+import TodoList from './TodoList.tsx';
+import TodoCounter from './TodoCounter.tsx';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -16,7 +17,16 @@ const styles = {
   }
 };
 
-class App extends React.Component {
+interface AppProps {
+  classes: any; // CSSのクラス名なので厳密に型宣言せずとも良いかなと
+}
+
+interface AppState {
+  tasks: TodoItemProps[];
+  uniqueId: number;
+}
+
+class App extends React.Component<AppProps, AppState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,24 +35,20 @@ class App extends React.Component {
     };
   }
 
-  addTodo = title => {
-    const { tasks, uniqueId } = this.state;
-    const newTask = { title: title, id: uniqueId };
-    const newTasks = tasks.concat(newTask);
+  addTodo = (title: string): void => {
+    const newTask = { title: title, id: this.state.uniqueId };
+    const newTasks = this.state.tasks.concat(newTask);
 
-    this.setState({ tasks: newTasks, uniqueId: uniqueId + 1 });
+    this.setState({ tasks: newTasks, uniqueId: this.state.uniqueId + 1 });
   };
 
-  clearTodo = () => {
+  clearTodo = (): void => {
     this.setState({ tasks: [], uniqueId: 0 });
   };
 
-  handleClick = () => {
-    this.setState({ tasks: [], uniqueId: 1 });
-  };
-
   render() {
-    const { tasks, uniqueId } = this.state;
+    // StateもPropsも一つずつしか必要ないが, 親コンポーネントはStateが増えやすいので敢えて分割代入のままにしている
+    const { tasks } = this.state;
     const { classes } = this.props;
 
     return (

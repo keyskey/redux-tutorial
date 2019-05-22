@@ -2,7 +2,6 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
-import PropTypes from 'prop-types';
 
 const styles = {
   todoInput: {
@@ -17,17 +16,28 @@ const styles = {
   }
 };
 
-const initialInput = 'タスクその1';
+interface TodoInputProps {
+  initialInput: string;
+  classes: any;
+  addTodo: (title: string) => void;
+  clearTodo: () => void;
+}
 
-class TodoInput extends React.Component {
+interface TodoInputState {
+  inputValue: string;
+}
+
+class TodoInput extends React.Component<TodoInputProps, TodoInputState> {
+  static defaultProps = { initialInput: 'タスクその2' };
+
   constructor(props) {
     super(props);
     this.state = {
-      inputValue: initialInput
+      inputValue: this.props.initialInput
     };
   }
 
-  handleChange = event => {
+  handleChange = (event: any) => {
     this.setState({ inputValue: event.target.value });
   };
 
@@ -41,7 +51,7 @@ class TodoInput extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { initialInput, classes } = this.props;
 
     return (
       <div className={classes.todoInput}>
@@ -69,9 +79,4 @@ class TodoInput extends React.Component {
     );
   }
 }
-
-TodoInput.propTypes = {
-  inputValue: PropTypes.string
-};
-
 export default withStyles(styles)(TodoInput);
