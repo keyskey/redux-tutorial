@@ -4,12 +4,21 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.9.3",
+    "husky": "^2.3.0",
+    "lint-staged": "^8.1.7",
+    "prettier": "^1.17.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
     "react-scripts": "3.0.1",
     "redux": "^4.0.1"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
   },
   "scripts": {
     "start": "react-scripts start",
@@ -34,5 +43,10 @@
   },
   "devDependencies": {
     "redux-devtools": "^3.5.0"
+  },
+  "husky": {
+    "hooks": {
+    "pre-commit": "lint-staged"
+    }
   }
 }
