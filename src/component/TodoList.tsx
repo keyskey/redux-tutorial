@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 const styles = {
   todoList: {
     paddingLeft: 0,
-    width: 400
+    width: 250
   }
 };
 
