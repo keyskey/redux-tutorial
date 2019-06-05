@@ -21,6 +21,7 @@ interface TodoInputProps {
   classes: any;
   addTodo: (title: string) => void;
   clearTodo: () => void;
+  clearCheckedTodo: () => void;
 }
 
 interface TodoInputState {
@@ -50,6 +51,10 @@ class TodoInput extends React.Component<TodoInputProps, TodoInputState> {
     this.props.clearTodo();
   };
 
+  handleClickClearCheckedTodo = () => {
+    this.props.clearCheckedTodo();
+  };
+
   render() {
     const { initialInput, classes } = this.props;
 
@@ -69,11 +74,11 @@ class TodoInput extends React.Component<TodoInputProps, TodoInputState> {
         </Button>
         <Button
           className={classes.clearButton}
-          onClick={this.handleClickClearTodo}
+          onClick={this.handleClickClearCheckedTodo}
           variant="contained"
           color="secondary"
         >
-          クリア
+          選択したタスクをクリア
         </Button>
       </div>
     );
