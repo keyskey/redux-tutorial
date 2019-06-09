@@ -16,8 +16,8 @@ interface TodoListProps {
 
 const TodoList = (props: TodoListProps) => {
   const { tasks, classes } = props;
-  const todoItems = tasks.map(task => {
-    return <TodoItem {...task} key={task.id} />;
+  const todoItems = tasks.map((task, index) => {
+    return <TodoItem {...task} key={index} />;
   });
 
   return (

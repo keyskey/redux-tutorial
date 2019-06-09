@@ -2,7 +2,7 @@ import React from 'react';
 import { TodoItemProps } from './TodoItem.tsx';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
+import Checkbox from '@material-ui/core/Checkbox';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
@@ -26,14 +26,14 @@ const CheckBoxList = (props: CheckBoxListProps) => {
     checkTodo(taskId, event.target.checked);
   };
 
-  const checkboxes = tasks.map(task => {
+  const checkboxes = tasks.map((task, index) => {
     return (
       <FormControlLabel
         control={
-          <Checkbox checked={task.checked} onChange={handleChange(task.id)} />
+          <Checkbox checked={task.checked} onChange={handleChange(index)} />
         }
         label={task.title}
-        key={task.id}
+        key={index}
       />
     );
   });

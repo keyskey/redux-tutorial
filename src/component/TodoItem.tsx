@@ -4,7 +4,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 export interface TodoItemProps {
   title: string;
-  id: number;
   checked: boolean;
 }
 

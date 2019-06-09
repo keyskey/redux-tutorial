@@ -2,7 +2,6 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import TodoInput from './TodoInput.tsx';
 import TodoItemProps from './TodoItem.tsx';
-import TodoList from './TodoList.tsx';
 import TodoCounter from './TodoCounter.tsx';
 import CheckBoxList from './CheckBoxList.tsx';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -24,7 +23,6 @@ interface AppProps {
 
 interface AppState {
   tasks: TodoItemProps[];
-  uniqueId: number;
 }
 
 class App extends React.Component<AppProps, AppState> {
@@ -37,44 +35,37 @@ class App extends React.Component<AppProps, AppState> {
           id: 0,
           checked: false
         }
-      ],
-      uniqueId: 1
+      ]
     };
   }
 
   addTodo = (title: string): void => {
-    const newTask = { title: title, id: this.state.uniqueId, checked: false };
+    const newTask = { title: title, checked: false };
     const newTasks = this.state.tasks.concat(newTask);
 
-    this.setState({ tasks: newTasks, uniqueId: this.state.uniqueId + 1 });
+    this.setState({ tasks: newTasks });
   };
 
   clearTodo = (): void => {
-    this.setState({ tasks: [], uniqueId: 0 });
+    this.setState({ tasks: [] });
   };
 
   checkTodo = (taskId: number, checked: boolean): void => {
-    const checkedTodos = this.state.tasks.map(task => {
-      if (task.id === taskId) {
-        return Object.assign(task, { checked: checked });
-      } else {
-        return task;
-      }
-    });
+    let checkedTodos = [...this.state.tasks];
+    checkedTodos[taskId].checked = checked;
 
     this.setState({ tasks: checkedTodos });
   };
 
   clearCheckedTodo = (): void => {
     const nonSelectedTodos = this.state.tasks.filter(
-      task => task.checked == false
+      task => task.checked === false
     );
-    const nextUniqueId = nonSelectedTodos.length;
     const renumberedTodos = nonSelectedTodos.map((todo, index) =>
-      Object.assign(todo, { id: index })
+      Object.assign({}, todo, { id: index })
     ); // 選択したTodoの削除後はtask.idが連番になっていないので貼り直す
 
-    this.setState({ tasks: renumberedTodos, uniqueId: nextUniqueId });
+    this.setState({ tasks: renumberedTodos });
   };
 
   render() {
@@ -102,7 +93,6 @@ class App extends React.Component<AppProps, AppState> {
           </Grid>
           <Grid item xs={4}>
             <TodoCounter count={tasks.length} />
-            <TodoList tasks={tasks} />
           </Grid>
         </Grid>
       </div>
