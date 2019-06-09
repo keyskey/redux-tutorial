@@ -6,7 +6,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import green from '@material-ui/core/colors/green';
 import red from '@material-ui/core/colors/red';
-import okImage from './images/OK.jpg';
+import okImage from './images/ok.jpg';
 import busyImage from './images/busy.jpg';
 
 const styles = {
@@ -35,10 +35,7 @@ const TodoCounter = (props: TodoCounterProps) => {
 
   return (
     <Card className={classes.counterCard}>
-      <CardContent
-        className={classes.counterContent}
-        style={{ backgroundColor: cardColor }}
-      >
+      <CardContent style={{ backgroundColor: cardColor }}>
         <Typography variant="headline" gutterBottom>
           {count}個のタスクが残っています
         </Typography>
