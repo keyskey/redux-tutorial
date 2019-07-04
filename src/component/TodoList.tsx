@@ -1,5 +1,5 @@
 import React from 'react';
-import { TodoItem, TodoItemProps } from './TodoItem.tsx';
+import { TodoItem, TodoItemProps } from './TodoItem';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {

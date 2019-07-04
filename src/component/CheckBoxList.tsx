@@ -1,5 +1,5 @@
 import React from 'react';
-import { TodoItemProps } from './TodoItem.tsx';
+import { TodoItemProps } from './TodoItem';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';

@@ -1,9 +1,9 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import TodoInput from './TodoInput.tsx';
-import TodoItemProps from './TodoItem.tsx';
-import TodoCounter from './TodoCounter.tsx';
-import CheckBoxList from './CheckBoxList.tsx';
+import TodoInput from './TodoInput';
+import { TodoItemProps } from './TodoItem';
+import TodoCounter from './TodoCounter';
+import CheckBoxList from './CheckBoxList';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -32,7 +32,6 @@ class App extends React.Component<AppProps, AppState> {
       tasks: [
         {
           title: 'タスクその1',
-          id: 0,
           checked: false
         }
       ]
