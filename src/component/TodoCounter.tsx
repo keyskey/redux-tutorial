@@ -28,7 +28,7 @@ interface TodoCounterProps {
   classes: any;
 }
 
-const TodoCounter = (props: TodoCounterProps) => {
+const TodoCounter: React.FC<TodoCounterProps> = props => {
   const { count, classes } = props;
   const cardColor = count <= 3 ? green['100'] : red['A100'];
   const cardImage = count <= 3 ? okImage : busyImage;

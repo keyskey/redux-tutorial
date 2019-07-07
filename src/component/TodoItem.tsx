@@ -7,7 +7,7 @@ export interface TodoItemProps {
   checked: boolean;
 }
 
-const TodoItem = (props: TodoItemProps) => {
+const TodoItem: React.FC<TodoItemProps> = props => {
   const { title } = props;
 
   return (

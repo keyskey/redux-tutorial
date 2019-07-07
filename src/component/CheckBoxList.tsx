@@ -17,20 +17,16 @@ interface CheckBoxListProps {
   checkTodo: (taskId: number, checked: boolean) => void;
 }
 
-const CheckBoxList = (props: CheckBoxListProps) => {
+const CheckBoxList: React.FC<CheckBoxListProps> = props => {
   const { tasks, classes, checkTodo } = props;
-
-  const handleChange = (taskId: number) => (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    checkTodo(taskId, event.target.checked);
-  };
-
   const checkboxes = tasks.map((task, index) => {
     return (
       <FormControlLabel
         control={
-          <Checkbox checked={task.checked} onChange={handleChange(index)} />
+          <Checkbox
+            checked={task.checked}
+            onChange={e => checkTodo(index, e.target.checked)}
+          />
         }
         label={task.title}
         key={index}

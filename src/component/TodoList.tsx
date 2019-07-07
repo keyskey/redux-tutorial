@@ -14,7 +14,7 @@ interface TodoListProps {
   classes: any;
 }
 
-const TodoList = (props: TodoListProps) => {
+const TodoList: React.FC<TodoListProps> = props => {
   const { tasks, classes } = props;
   const todoItems = tasks.map((task, index) => {
     return <TodoItem {...task} key={index} />;
