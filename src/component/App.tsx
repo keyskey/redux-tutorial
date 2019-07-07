@@ -1,31 +1,17 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import Header from './Header';
 import TodoInput from './TodoInput';
 import { TodoItemProps } from './TodoItem';
 import TodoCounter from './TodoCounter';
 import CheckBoxList from './CheckBoxList';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import teal from '@material-ui/core/colors/teal';
-
-const styles = {
-  appBar: {
-    backgroundColor: teal['A700']
-  }
-};
-
-interface AppProps {
-  classes: any; // CSSのクラス名なので厳密に型宣言せずとも良いかなと
-}
 
 interface AppState {
   tasks: TodoItemProps[];
 }
 
-class App extends React.Component<AppProps, AppState> {
+class App extends React.Component<{}, AppState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -68,20 +54,12 @@ class App extends React.Component<AppProps, AppState> {
   };
 
   render() {
-    // StateもPropsも一つずつしか必要ないが, 親コンポーネントはStateが増えやすいので敢えて分割代入のままにしている
     const { tasks } = this.state;
-    const { classes } = this.props;
 
     return (
       <div>
         <CssBaseline />
-        <AppBar className={classes.appBar} position="static">
-          <Toolbar>
-            <Typography variant="title" color="inherit">
-              Todo App
-            </Typography>
-          </Toolbar>
-        </AppBar>
+        <Header />
         <Grid container>
           <Grid item xs={6}>
             <TodoInput
@@ -99,4 +77,4 @@ class App extends React.Component<AppProps, AppState> {
   }
 }
 
-export default withStyles(styles)(App);
+export default App;
