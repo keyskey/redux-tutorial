@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './Header';
 import TodoInput from './TodoInput';
 import { TodoItemProps } from './TodoItem';
@@ -7,71 +7,50 @@ import CheckBoxList from './CheckBoxList';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 
-interface AppState {
-  tasks: TodoItemProps[];
-}
+const App: React.FC = () => {
+  const [tasks, setTasks] = useState<TodoItemProps[]>([
+    { title: 'タスクその1', checked: false }
+  ]);
 
-class App extends React.Component<{}, AppState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tasks: [
-        {
-          title: 'タスクその1',
-          checked: false
-        }
-      ]
-    };
-  }
+  const addTodo = (title: string): void => {
+    if (title === '') {
+      return;
+    }
 
-  addTodo = (title: string): void => {
     const newTask = { title: title, checked: false };
-    const newTasks = this.state.tasks.concat(newTask);
+    const newTasks = tasks.concat(newTask);
 
-    this.setState({ tasks: newTasks });
+    setTasks(newTasks);
   };
 
-  clearTodo = (): void => {
-    this.setState({ tasks: [] });
-  };
-
-  checkTodo = (taskId: number, checked: boolean): void => {
-    let checkedTodos = [...this.state.tasks];
+  const checkTodo = (taskId: number, checked: boolean): void => {
+    let checkedTodos = [...tasks];
     checkedTodos[taskId].checked = checked;
 
-    this.setState({ tasks: checkedTodos });
+    setTasks(checkedTodos);
   };
 
-  clearCheckedTodo = (): void => {
-    const nonSelectedTodos = this.state.tasks.filter(
-      task => task.checked === false
-    );
+  const clearCheckedTodo = (): void => {
+    const nonSelectedTodos = tasks.filter(task => task.checked === false);
 
-    this.setState({ tasks: nonSelectedTodos });
+    setTasks(nonSelectedTodos);
   };
 
-  render() {
-    const { tasks } = this.state;
-
-    return (
-      <div>
-        <CssBaseline />
-        <Header />
-        <Grid container>
-          <Grid item xs={6}>
-            <TodoInput
-              addTodo={this.addTodo}
-              clearCheckedTodo={this.clearCheckedTodo}
-            />
-            <CheckBoxList tasks={tasks} checkTodo={this.checkTodo} />
-          </Grid>
-          <Grid item xs={4}>
-            <TodoCounter count={tasks.length} />
-          </Grid>
+  return (
+    <>
+      <CssBaseline />
+      <Header />
+      <Grid container>
+        <Grid item xs={6}>
+          <TodoInput addTodo={addTodo} clearCheckedTodo={clearCheckedTodo} />
+          <CheckBoxList tasks={tasks} checkTodo={checkTodo} />
         </Grid>
-      </div>
-    );
-  }
-}
+        <Grid item xs={4}>
+          <TodoCounter count={tasks.length} />
+        </Grid>
+      </Grid>
+    </>
+  );
+};
 
 export default App;
