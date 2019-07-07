@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import AddButton from './AddButton';
 import DeleteButton from './DeleteButton';
 import { withStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
-import Button from '@material-ui/core/Button';
 
 const styles = {
   todoInput: {
@@ -40,10 +40,8 @@ const TodoInput: React.FC<TodoInputProps> = props => {
         onChange={handleInput}
         value={inputValue}
       />
-      <Button onClick={handleAddTodo} variant="contained" color="primary">
-        登録
-      </Button>
-      <DeleteButton clearCheckedTodo={clearCheckedTodo} />
+      <AddButton action={handleAddTodo} />
+      <DeleteButton action={clearCheckedTodo} />
     </div>
   );
 };
