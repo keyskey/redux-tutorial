@@ -46,11 +46,8 @@ class App extends React.Component<{}, AppState> {
     const nonSelectedTodos = this.state.tasks.filter(
       task => task.checked === false
     );
-    const renumberedTodos = nonSelectedTodos.map((todo, index) =>
-      Object.assign({}, todo, { id: index })
-    ); // 選択したTodoの削除後はtask.idが連番になっていないので貼り直す
 
-    this.setState({ tasks: renumberedTodos });
+    this.setState({ tasks: nonSelectedTodos });
   };
 
   render() {
