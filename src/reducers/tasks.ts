@@ -22,12 +22,12 @@ const tasksReducer: Reducer<TaskState, TaskAction> = (
 ) => {
   switch (action.type) {
     case TaskActionTypes.ADD_TASK: {
-      if (action.payload.content === '') {
+      if (state.inputValue === '') {
         return state;
       }
 
       const newTask = {
-        content: action.payload.content,
+        content: state.inputValue,
         checked: false
       };
 

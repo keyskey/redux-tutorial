@@ -14,11 +14,8 @@ export interface TaskAction {
   };
 }
 
-export const addTask = (content: string): TaskAction => ({
-  type: TaskActionTypes.ADD_TASK,
-  payload: {
-    content: content
-  }
+export const addTask = (): TaskAction => ({
+  type: TaskActionTypes.ADD_TASK
 });
 
 export const inputTask = (content: string): TaskAction => ({

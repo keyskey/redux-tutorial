@@ -2,15 +2,14 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 
 interface AddButtonProps {
-  item: any;
-  action: (item: any) => void;
+  action: () => void;
 }
 
 const AddButton: React.FC<AddButtonProps> = props => {
-  const { item, action } = props;
+  const { action } = props;
 
   return (
-    <Button onClick={e => action(item)} variant="contained" color="primary">
+    <Button onClick={action} variant="contained" color="primary">
       登録
     </Button>
   );
