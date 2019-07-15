@@ -1,5 +1,4 @@
 import React from 'react';
-import { TodoItemProps } from './TodoItem';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -11,24 +10,29 @@ const styles = {
   }
 };
 
-interface CheckBoxListProps {
-  tasks: TodoItemProps[];
+export interface Item {
+  content: string;
+  checked: boolean;
+}
+
+export interface CheckBoxListProps {
+  items: Item[];
   classes: any;
-  checkTodo: (taskId: number, checked: boolean) => void;
+  checkItem: (itemId: number, checked: boolean) => void;
 }
 
 const CheckBoxList: React.FC<CheckBoxListProps> = props => {
-  const { tasks, classes, checkTodo } = props;
-  const checkboxes = tasks.map((task, index) => {
+  const { items, classes, checkItem } = props;
+  const checkboxes = items.map((item, index) => {
     return (
       <FormControlLabel
         control={
           <Checkbox
-            checked={task.checked}
-            onChange={e => checkTodo(index, e.target.checked)}
+            checked={item.checked}
+            onChange={e => checkItem(index, e.target.checked)}
           />
         }
-        label={task.title}
+        label={item.content}
         key={index}
       />
     );
