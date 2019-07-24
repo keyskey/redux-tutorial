@@ -15,7 +15,7 @@ interface HeaderProps {
   classes: any;
 }
 
-const Header = (props: HeaderProps) => {
+const Header: React.FC<HeaderProps> = props => {
   const { classes } = props;
 
   return (

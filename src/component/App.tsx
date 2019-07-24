@@ -7,7 +7,7 @@ import CheckBoxList from './CheckBoxList';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 
-const App: React.FC = () => {
+const App: React.FC<{}> = () => {
   const [tasks, setTasks] = useState<TodoItemProps[]>([
     { title: 'タスクその1', checked: false }
   ]);
