@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import axiosbase from 'axios';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -26,33 +27,62 @@ interface HeaderProps {
   classes: any;
 }
 
-const Header: React.FC<HeaderProps> = props => {
-  const { classes } = props;
-  const screenNames = ['Home', 'Profile'];
+interface HeaderStates {
+  screenNames: string[];
+}
 
-  return (
-    <>
-      <AppBar className={classes.appBar} position="static">
-        <Toolbar>
-          <Typography variant="title" color="inherit">
-            Todo App
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer variant="permanent" anchor="left">
-        <List className={classes.drawerList}>
-          {screenNames.map((name, index) => (
-            <ListItem button key={index}>
-              <ListItemText
-                className={classes.drawerListItemText}
-                primary={name}
-              />
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
-    </>
-  );
-};
+class Header extends React.Component<HeaderProps, HeaderStates> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      screenNames: []
+    };
+  }
+
+  componentDidMount() {
+    // 参考: https://t-kojima.github.io/2018/06/19/0016-xhr-fetch-to-axios/
+    const axios = axiosbase.create({
+      baseURL: 'http://localhost:4000',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      responseType: 'json'
+    });
+
+    axios
+      .get('/api/v1/screens/index')
+      .then(res => res.data)
+      .then(screens => screens.map(screen => screen.name))
+      .then(names => this.setState({ screenNames: names }));
+  }
+
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <>
+        <AppBar className={classes.appBar} position="static">
+          <Toolbar>
+            <Typography variant="title" color="inherit">
+              Todo App
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Drawer variant="permanent" anchor="left">
+          <List className={classes.drawerList}>
+            {this.state.screenNames.map((name, index) => (
+              <ListItem button key={index}>
+                <ListItemText
+                  className={classes.drawerListItemText}
+                  primary={name}
+                />
+              </ListItem>
+            ))}
+          </List>
+        </Drawer>
+      </>
+    );
+  }
+}
 
 export default withStyles(styles)(Header);
