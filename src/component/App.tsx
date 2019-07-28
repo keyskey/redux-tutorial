@@ -1,27 +1,45 @@
-import React, { useState } from 'react';
-import Header, { drawerWidth } from './Header';
+import React, { useState, useEffect } from 'react';
+import axiosbase from 'axios';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Grid from '@material-ui/core/Grid';
+import Header from './Header';
+import Sidebar, { drawerWidth } from './Sidebar';
 import TodoInput from './TodoInput';
 import { TodoItemProps } from './TodoItem';
 import TodoCounter from './TodoCounter';
 import CheckBoxList from './CheckBoxList';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
-import { withStyles } from '@material-ui/core/styles';
 
-const styles = {
-  app: {
-    paddingLeft: drawerWidth
-  }
-};
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    app: {
+      paddingLeft: drawerWidth
+    }
+  })
+);
 
-interface AppProps {
-  classes: any;
-}
-
-const App: React.FC<AppProps> = props => {
-  const { classes } = props;
+export default function App() {
   const initialTasks = [{ title: 'タスクその1', checked: false }];
   const [tasks, setTasks] = useState<TodoItemProps[]>(initialTasks);
+  const [screenNames, setScreenNames] = useState<string[]>([]);
+  const classes = useStyles({});
+
+  // constructor
+  useEffect(() => {
+    // 参考: https://t-kojima.github.io/2018/06/19/0016-xhr-fetch-to-axios/
+    const axios = axiosbase.create({
+      baseURL: 'http://localhost:4000',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      responseType: 'json'
+    });
+
+    axios
+      .get('/api/v1/screens/index')
+      .then(res => res.data.map(screen => screen.name))
+      .then(names => setScreenNames(names));
+  }, []);
 
   const addTodo = (title: string): void => {
     if (title === '') {
@@ -51,6 +69,7 @@ const App: React.FC<AppProps> = props => {
     <>
       <CssBaseline />
       <Header />
+      <Sidebar screenNames={screenNames} />
       <Grid container className={classes.app}>
         <Grid item xs={6}>
           <TodoInput addTodo={addTodo} clearCheckedTodo={clearCheckedTodo} />
@@ -62,6 +81,4 @@ const App: React.FC<AppProps> = props => {
       </Grid>
     </>
   );
-};
-
-export default withStyles(styles)(App);
+}

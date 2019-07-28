@@ -1,58 +1,32 @@
-import React, { useState } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import React from 'react';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import teal from '@material-ui/core/colors/teal';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import { Drawer, List } from '@material-ui/core';
+import { drawerWidth } from './Sidebar';
 
-export const drawerWidth = 140;
-const styles = {
-  appBar: {
-    backgroundColor: teal['A700'],
-    paddingLeft: drawerWidth
-  },
-  drawerList: {
-    width: drawerWidth
-  },
-  drawerListItemText: {
-    textAlign: 'center' as 'center'
-  }
-};
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    appBar: {
+      backgroundColor: teal['A700'],
+      paddingLeft: drawerWidth
+    }
+  })
+);
 
-interface HeaderProps {
-  classes: any;
-}
-
-const Header: React.FC<HeaderProps> = props => {
-  const { classes } = props;
-  const screenNames = ['Home', 'Profile'];
+export default function Header() {
+  const classes = useStyles({});
 
   return (
     <>
       <AppBar className={classes.appBar} position="static">
         <Toolbar>
-          <Typography variant="title" color="inherit">
+          <Typography variant="h5" color="inherit">
             Todo App
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" anchor="left">
-        <List className={classes.drawerList}>
-          {screenNames.map((name, index) => (
-            <ListItem button key={index}>
-              <ListItemText
-                className={classes.drawerListItemText}
-                primary={name}
-              />
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
     </>
   );
-};
-
-export default withStyles(styles)(Header);
+}

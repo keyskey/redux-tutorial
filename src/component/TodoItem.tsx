@@ -7,14 +7,10 @@ export interface TodoItemProps {
   checked: boolean;
 }
 
-const TodoItem: React.FC<TodoItemProps> = props => {
-  const { title } = props;
-
+export default function TodoItem(props: TodoItemProps) {
   return (
     <ListItem button>
-      <ListItemText primary={title} />
+      <ListItemText primary={props.title} />
     </ListItem>
   );
-};
-
-export default TodoItem;
+}

@@ -1,28 +1,30 @@
 import React, { useState } from 'react';
 import AddButton from './AddButton';
 import DeleteButton from './DeleteButton';
-import { withStyles } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
 
-const styles = {
-  todoInput: {
-    padding: 16
-  },
-  input: {
-    marginRight: 16,
-    width: 300
-  }
-};
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    todoInput: {
+      padding: 16
+    },
+    input: {
+      marginRight: 16,
+      width: 300
+    }
+  })
+);
 
 interface TodoInputProps {
   addTodo: (title: string) => void;
   clearCheckedTodo: () => void;
-  classes: any;
 }
 
-const TodoInput: React.FC<TodoInputProps> = props => {
-  const { addTodo, clearCheckedTodo, classes } = props;
+export default function TodoInput(props: TodoInputProps) {
+  const { addTodo, clearCheckedTodo } = props;
   const [inputValue, setInputValue] = useState<string>('');
+  const classes = useStyles({});
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setInputValue(e.target.value);
@@ -44,6 +46,4 @@ const TodoInput: React.FC<TodoInputProps> = props => {
       <DeleteButton action={clearCheckedTodo} />
     </div>
   );
-};
-
-export default withStyles(styles)(TodoInput);
+}
