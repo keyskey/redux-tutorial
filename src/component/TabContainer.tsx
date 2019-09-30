@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import { drawerWidth } from './Sidebar';
 import TaskInputContainer from './TaskInputContainer';
+import ActivityChartContainer from './ActivityChartContainer';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,7 +41,7 @@ export default function TabContainer() {
       </TabPanel>
 
       <TabPanel value={value} index={1}>
-        アクティビティログ(実装予定)
+        <ActivityChartContainer />
       </TabPanel>
     </div>
   );
