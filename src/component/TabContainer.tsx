@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import { drawerWidth } from './Sidebar';
 import TaskInputContainer from './TaskInputContainer';
+import ScrollableTableContainer from './ScrollableTableContainer';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,6 +33,7 @@ export default function TabContainer() {
         >
           <Tab label="タスク入力" />
           <Tab label="アクティビティログ" />
+          <Tab label="データテーブル" />
         </Tabs>
       </AppBar>
 
@@ -41,6 +43,10 @@ export default function TabContainer() {
 
       <TabPanel value={value} index={1}>
         アクティビティログ(実装予定)
+      </TabPanel>
+
+      <TabPanel value={value} index={2}>
+        <ScrollableTableContainer />
       </TabPanel>
     </div>
   );
